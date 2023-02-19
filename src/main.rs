@@ -2,7 +2,7 @@ mod engines;
 mod utils;
 
 use utils::user_input;
-use engines::{fibonacci, game_of_life};
+use engines::{fibonacci, game_of_life::{self, GOL}};
 
 
 fn play_fibonacci() {
@@ -17,8 +17,21 @@ fn play_fibonacci() {
 }
 
 fn play_game_of_life() {
+
     // Conways Game of Life with R-Pentomino start initialisation
-    let mut gol = game_of_life::r_pentomino();
+    let mut gol: GOL;
+
+    // ask user for init conditions
+    loop {
+        let init_type = user_input::user_input_with_parse::<char>("Select initial conditions: \nR-Pentomino\t\t(R)");
+        match init_type {
+            'R' => {
+                gol = game_of_life::r_pentomino();
+                break;
+            },
+            _ => {println!("Unknown code {}.", init_type)}
+        }
+    }
 
     // ask user for iteration count
     let num_iterations = user_input::user_input_with_parse::<i32>("How many iterations for game of life: ");
