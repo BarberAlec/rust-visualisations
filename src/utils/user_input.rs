@@ -1,4 +1,4 @@
-use std::io;
+use std::{io, str::FromStr};
 
 fn ask_user_input(msg: &str) -> String {
     let mut user_input = String::new();
@@ -19,14 +19,14 @@ fn ask_user_input(msg: &str) -> String {
 
 
 /// Ask user question `msg` until user responds with i32 appropaite response
-pub fn user_input_with_parse(msg: &str) -> i32 {
-    let int_resp: i32;
+pub fn user_input_with_parse<T: std::str::FromStr>(msg: &str) -> T where <T as FromStr>::Err: std::fmt::Display{
+    let int_resp: T;
 
     // Get user input and parse to i32
     loop {
         let user_input = ask_user_input(msg);
 
-        match user_input.parse::<i32>() {
+        match user_input.parse::<T>() {
             Ok(i) => {
                 int_resp = i;
                 break;
