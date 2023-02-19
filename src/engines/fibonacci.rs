@@ -1,5 +1,7 @@
 use std::{fmt::Error, io};
 
+
+
 fn ask_user_input() -> String {
     let mut user_input = String::new();
     println!("How many fibonacci numbers would you like to print?");
@@ -38,7 +40,12 @@ fn user_input_with_parse() -> i32 {
 }
 
 pub fn get_fibonacci(cnt: i32) -> Result<Vec<i32>, Error> {
-    if cnt < 0 {
+    if cnt < 0 || cnt > 47 {
+        // cant have negative counts
+        return Err(Error);
+    }
+    if cnt > 47 {
+        // cannot have a count which results in an i32 overflow
         return Err(Error);
     }
     let mut fib_vec: Vec<i32> = Vec::new();
@@ -62,6 +69,7 @@ pub fn get_fibonacci(cnt: i32) -> Result<Vec<i32>, Error> {
     Ok(fib_vec)
 }
 
+#[allow(dead_code)]
 pub fn execute_fibonacci() {
     let fib_cnt = user_input_with_parse();
     let fib_nums = get_fibonacci(fib_cnt).expect(&format!(
@@ -96,4 +104,6 @@ mod tests {
     fn fibonacci_get_negative() {
         assert_eq!(get_fibonacci(-1), Err(Error));
     }
+
+
 }
