@@ -105,7 +105,7 @@ impl GOL {
                 let value: bool;
                 match self.get_value(x+i, y+j) {
                     Ok(i) => {value = i;},
-                    Err(_) => (continue)
+                    Err(_) => continue
                 };
                 count = count + (value as i32);
             }

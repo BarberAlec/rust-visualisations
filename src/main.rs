@@ -1,8 +1,10 @@
 mod engines;
 mod utils;
+// pub mod gui;
 
 use utils::user_input;
 use engines::{fibonacci, game_of_life::{self, GOL}};
+// use gui::window;
 
 
 fn play_fibonacci() {
@@ -17,7 +19,6 @@ fn play_fibonacci() {
 }
 
 fn play_game_of_life() {
-
     // Conways Game of Life with R-Pentomino start initialisation
     let mut gol: GOL;
 
@@ -25,10 +26,7 @@ fn play_game_of_life() {
     loop {
         let init_type = user_input::user_input_with_parse::<char>("Select initial conditions: \nR-Pentomino\t\t(R)");
         match init_type {
-            'R' => {
-                gol = game_of_life::r_pentomino();
-                break;
-            },
+            'R' => {gol = game_of_life::r_pentomino(); break;},
             _ => {println!("Unknown code {}.", init_type)}
         }
     }
@@ -51,4 +49,8 @@ fn main() {
         'G' => {play_game_of_life();},
         _ => {println!("Unrecognised code {}, exiting.", game_code)}
     }
+
+    // GPU rendering
+    // env_logger::init();
+    // pollster::block_on(window::run());
 }
