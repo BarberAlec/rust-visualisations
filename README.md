@@ -1,4 +1,6 @@
 # Adventures in Learning Rust
 Featuring Fibonacci and Conway's Game of Life!
 
-Next objective: visualisations.
+Now including gif visualisation!
+
+![R-Pentomino_201_x_201](https://github.com/BarberAlec/rust-visualisations/blob/master/r_pentomino.gif)
