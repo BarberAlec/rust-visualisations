@@ -1,12 +1,14 @@
 mod engines;
 mod utils;
-// pub mod gui;
+pub mod gui;
 
 use utils::user_input;
 use engines::{fibonacci, game_of_life::{self, GOL}};
 // use gui::window;
+use gui::gif;
 
 
+#[allow(dead_code)]
 fn play_fibonacci() {
     let count = user_input::user_input_with_parse::<i32>("How many fibonacci numbers would you like to print: ");
 
@@ -18,9 +20,13 @@ fn play_fibonacci() {
     println!("{:?}", fib_nums);
 }
 
+#[allow(dead_code)]
 fn play_game_of_life() {
     // Conways Game of Life with R-Pentomino start initialisation
     let mut gol: GOL;
+
+    // 2d vector to store state at each iteration
+    let mut game_states: Vec<Vec<Vec<bool>>> = Vec::new();
 
     // ask user for init conditions
     loop {
@@ -34,12 +40,22 @@ fn play_game_of_life() {
     // ask user for iteration count
     let num_iterations = user_input::user_input_with_parse::<i32>("How many iterations for game of life: ");
 
+    game_states.push(gol.current_state());
+
     // loop and print current alive count
     for ind in 0..num_iterations {
         println!("After {} iterations, alive: {}", ind, gol.alive_count());
         gol.iterate();
+        game_states.push(gol.current_state());
     }
+
+    match gif::create_gif("Game_of_life_game.gif", game_states) {
+        Ok(_) => {}
+        Err(e) => {println!("{}", e)}
+    };
 }
+
+
 
 fn main() {
     let game_code = user_input::user_input_with_parse::<char>("What game would you like to play?\nConway's Game of Life\t(G)\nFibonacci\t\t(F)");
@@ -49,8 +65,4 @@ fn main() {
         'G' => {play_game_of_life();},
         _ => {println!("Unrecognised code {}, exiting.", game_code)}
     }
-
-    // GPU rendering
-    // env_logger::init();
-    // pollster::block_on(window::run());
 }

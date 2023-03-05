@@ -126,6 +126,11 @@ impl GOL {
         count
     }
 
+    /// clone of current state of game
+    pub fn current_state(&mut self) -> Vec<Vec<bool>> {
+        self.state.clone()
+    }
+
     /// Single iteration of game of life
     pub fn iterate(&mut self) {
         // create new state object, this will replace old state object
