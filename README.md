@@ -3,4 +3,5 @@ Featuring Fibonacci and Conway's Game of Life!
 
 Now including gif visualisation!
 
-![R-Pentomino_201_x_201](https://github.com/BarberAlec/rust-visualisations/blob/master/r_pentomino.gif =502x502)
+<!-- ![R-Pentomino_201_x_201](https://github.com/BarberAlec/rust-visualisations/blob/master/r_pentomino.gif =502x502) -->
+<img src="https://github.com/BarberAlec/rust-visualisations/blob/master/r_pentomino.gif" width="200%" height="200%"/>
