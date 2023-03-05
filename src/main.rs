@@ -24,15 +24,25 @@ fn play_fibonacci() {
 fn play_game_of_life() {
     // Conways Game of Life with R-Pentomino start initialisation
     let mut gol: GOL;
+    let gif_name: &str;
 
     // 2d vector to store state at each iteration
     let mut game_states: Vec<Vec<Vec<bool>>> = Vec::new();
 
     // ask user for init conditions
     loop {
-        let init_type = user_input::user_input_with_parse::<char>("Select initial conditions: \nR-Pentomino\t\t(R)");
+        let init_type = user_input::user_input_with_parse::<char>("Select initial conditions:\
+                                                                                \nR-Pentomino\t\t\t(R)\
+                                                                                \nDiehard\t\t\t\t(D)\
+                                                                                \nAcorn\t\t\t\t(A)\
+                                                                                \nBlock Layering Switch Engine 1\t(B)\
+                                                                                \nBlock Layering Switch Engine 2\t(Z)");
         match init_type {
-            'R' => {gol = game_of_life::r_pentomino(); break;},
+            'R' => {gol = game_of_life::r_pentomino(); gif_name="R-Pentomino_game_of_life.gif"; break;},
+            'D' => {gol = game_of_life::diehard(); gif_name="Diehard_game_of_life.gif"; break;},
+            'A' => {gol = game_of_life::acorn(); gif_name="Acorn_game_of_life.gif"; break;},
+            'B' => {gol = game_of_life::block_laying_switch_engine_1(); gif_name="BlockLayeringSwitchEngine_1_game_of_life.gif"; break;},
+            'Z' => {gol = game_of_life::block_laying_switch_engine_2(); gif_name="BlockLayeringSwitchEngine_2_game_of_life.gif"; break;},
             _ => {println!("Unknown code {}.", init_type)}
         }
     }
@@ -49,7 +59,7 @@ fn play_game_of_life() {
         game_states.push(gol.current_state());
     }
 
-    match gif::create_gif("Game_of_life_game.gif", game_states) {
+    match gif::create_gif(gif_name, game_states) {
         Ok(_) => {}
         Err(e) => {println!("{}", e)}
     };

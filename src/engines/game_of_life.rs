@@ -164,18 +164,112 @@ impl GOL {
 }
 
 
-/// instansiate R-Pentomino game of life
+/// Instansiate R-Pentomino game of life
+/// 
+/// R-pentomino failes to stabilize in a small number of generations (it takes 1103 generations to stabilize)
 pub fn r_pentomino() -> GOL {
     // Create game of life with all values defaulting to false
     let mut game_of_life: GOL = GOL {..Default::default()};
 
-    // R-Pentomino
     game_of_life.set_true(30, 30).unwrap();
     game_of_life.set_true(30, 31).unwrap();
     game_of_life.set_true(30, 32).unwrap();
 
     game_of_life.set_true(29, 31).unwrap();
     game_of_life.set_true(31, 32).unwrap();
+
+    game_of_life
+}
+
+/// Instansiate Diehard game of life
+/// 
+/// Diehard is a pattern that eventually disappears, rather than stabilizing, after 130 generations
+pub fn diehard() -> GOL {
+    // Create game of life with all values defaulting to false
+    let mut game_of_life: GOL = GOL {..Default::default()};
+
+    game_of_life.set_true(30, 30).unwrap();
+    game_of_life.set_true(30, 31).unwrap();
+    game_of_life.set_true(29, 31).unwrap();
+
+    game_of_life.set_true(34, 30).unwrap();
+    game_of_life.set_true(35, 30).unwrap();
+    game_of_life.set_true(36, 30).unwrap();
+
+    game_of_life.set_true(35, 32).unwrap();
+
+    game_of_life
+}
+
+/// Instansiate Acorn game of life
+/// 
+/// Acorn takes 5206 generations to generate 633 cells, including 13 escaped gliders
+pub fn acorn() -> GOL {
+    // Create game of life with all values defaulting to false
+    let mut game_of_life: GOL = GOL {..Default::default()};
+
+    game_of_life.set_true(29, 30).unwrap();
+    game_of_life.set_true(30, 30).unwrap();
+
+    game_of_life.set_true(30, 32).unwrap();
+
+    game_of_life.set_true(32, 31).unwrap();
+
+    game_of_life.set_true(33, 30).unwrap();
+    game_of_life.set_true(34, 30).unwrap();
+    game_of_life.set_true(35, 30).unwrap();
+
+    game_of_life
+}
+
+/// Instansiate block_laying_switch_engine_1
+/// 
+/// A configuration that leaves behind two-by-two still life blocks as it translates itself across the game's universe
+pub fn block_laying_switch_engine_1() -> GOL {
+    // Create game of life with all values defaulting to false
+    let mut game_of_life: GOL = GOL {..Default::default()};
+
+    game_of_life.set_true(28, 30).unwrap();
+
+    game_of_life.set_true(30, 30).unwrap();
+    game_of_life.set_true(30, 31).unwrap();
+
+
+    game_of_life.set_true(32, 32).unwrap();
+    game_of_life.set_true(32, 33).unwrap();
+    game_of_life.set_true(32, 34).unwrap();
+
+    game_of_life.set_true(34, 33).unwrap();
+    game_of_life.set_true(34, 34).unwrap();
+    game_of_life.set_true(34, 35).unwrap();
+    game_of_life.set_true(35, 34).unwrap();
+
+    game_of_life
+}
+
+/// Instansiate block_laying_switch_engine_2
+/// 
+/// A configuration that leaves behind two-by-two still life blocks as it translates itself across the game's universe
+pub fn block_laying_switch_engine_2() -> GOL {
+    // Create game of life with all values defaulting to false
+    let mut game_of_life: GOL = GOL {..Default::default()};
+
+    game_of_life.set_true(30, 30).unwrap();
+    game_of_life.set_true(31, 31).unwrap();
+    game_of_life.set_true(32, 31).unwrap();
+    game_of_life.set_true(32, 30).unwrap();
+
+    game_of_life.set_true(33, 32).unwrap();
+    game_of_life.set_true(34, 32).unwrap();
+    game_of_life.set_true(34, 31).unwrap();
+    game_of_life.set_true(34, 30).unwrap();
+
+    game_of_life.set_true(34, 34).unwrap();
+
+    game_of_life.set_true(30, 33).unwrap();
+    game_of_life.set_true(30, 34).unwrap();
+    game_of_life.set_true(31, 34).unwrap();
+    game_of_life.set_true(32, 34).unwrap();
 
     game_of_life
 }
